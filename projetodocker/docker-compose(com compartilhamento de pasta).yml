@@ -1,0 +1,32 @@
+version: '3.9'  # versão do docker-compose
+
+services:
+  db:  # serviço do banco de dados
+    image: mysql/mysql-server:latest  # imagem a ser usada
+    restart: always  # reiniciar automaticamente em caso de falhas
+    environment:  # variáveis de ambiente
+      MYSQL_ROOT_PASSWORD: abc  # senha do root do MySQL
+    ports:  # mapeamento de portas
+      - "3306:3306"  # porta do host: porta do container
+    container_name: avenger  # nome do container
+    volumes:  # mapeamento de volumes
+      - c:/mysqlcont:/var/lib/mysql  # caminho do host: caminho do container
+    networks:
+      - rededocker
+networks:
+  rededocker:
+    driver: bridge
+    restart: unless-stopped  # reiniciar a menos que seja explicitamente interrompido ou removido
+
+
+
+
+
+
+
+
+
+
+    
+
+

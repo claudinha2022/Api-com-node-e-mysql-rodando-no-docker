@@ -1,0 +1,29 @@
+version: '3.9' # Versão do Docker Compose
+
+services: # Definindo os serviços do Docker Compose
+
+  db: # Serviço para o banco de dados MySQL
+
+    image: mysql/mysql-server:latest # Imagem do MySQL
+    restart: always # Reinicia o contêiner sempre que ele for parado
+    environment: # Define as variáveis de ambiente
+      MYSQL_ROOT_PASSWORD: 123 # Senha do usuário root
+    ports: # Define as portas expostas do contêiner
+      - "3306:3306" # Mapeamento da porta 3306 do contêiner para a porta 3306 do host
+    container_name: contmysql # Nome do contêiner
+    command: ["mysqld", "--init-file", "/etc/mysql/init.sql"] # Comando executado no contêiner
+    volumes: # Define os volumes usados pelo contêiner
+      - c:\projetodocker\init.sql:/etc/mysql/init.sql # Mapeamento do arquivo init.sql do host para o contêiner
+   
+  web: # Serviço para o servidor web Apache HTTP Server
+
+    image: httpd # Imagem do Apache HTTP Server
+    container_name: apache01 # Nome do contêiner
+    restart: always # Reinicia o contêiner sempre que ele for parado
+    ports: # Define as portas expostas do contêiner
+      - "80:80" # Mapeamento da porta 80 do contêiner para a porta 80 do host
+    volumes: # Define os volumes usados pelo contêiner
+      - c:\sitehttp:/usr/local/apache2/htdocs/ # Mapeamento da pasta do host para a pasta do Apache HTTP Server
+
+
+
